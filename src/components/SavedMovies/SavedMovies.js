@@ -1,6 +1,7 @@
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
+// import Preloader from '../Preloader/Preloader';
 
 
 function SavedMovies({list}) {
@@ -14,6 +15,7 @@ function SavedMovies({list}) {
   return (
     <section className='saved-movies'>
       <SearchForm />
+      {/* <Preloader />  */}
       <MoviesCardList list={filterList} savedMoviesPage={true}/>
     </section>
   );

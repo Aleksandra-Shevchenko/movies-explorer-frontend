@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import React from 'react';
 import './SearchForm.css';
 
 function SearchForm() {
 
-  const [value, setValue] = useState('on');
+  const [shortFilms, setShortFilms] = React.useState('on');
 	
 	function changeHandler(event) {
-		setValue(event.target.value);
+		setShortFilms(event.target.value);
 	}
 
   return (
@@ -21,19 +21,19 @@ function SearchForm() {
         <div className='search-form__filter-box'>
           <p className='search-form__filter-name'>Короткометражки</p>
           <label className={`search-form__filter
-          ${value === 'on' ? 'search-form__filter_active' : null}`}>
+          ${shortFilms === 'on' ? 'search-form__filter_active' : null}`}>
             <input className='search-form__radio search-form__radio_off'
               type='radio'
-              name='toggle'
+              name='shortFilms'
               value='off'
-              checked={value === 'off' ? true : false}
+              checked={shortFilms === 'off' ? true : false}
               onChange={changeHandler}
             />
             <input className='search-form__radio search-form__radio_on'
               type='radio'
-              name='toggle'
+              name='shortFilms'
               value='on'
-              checked={value === 'on' ? true : false}
+              checked={shortFilms === 'on' ? true : false}
               onChange={changeHandler}
             />
             <span className='search-form__switch'></span>
