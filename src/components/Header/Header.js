@@ -1,4 +1,5 @@
 import './Header.css';
+import '../App/App.css';
 
 import logo from '../../images/logo.svg';
 import { Link, Route } from 'react-router-dom';
@@ -13,7 +14,7 @@ function Header() {
   return (
     <Route exact path={endpoints.concat('/')}>
       <header className='header'>
-        <Link to='/'><img className='header__logo' src={logo} alt='Логотип приложения Movies' /></Link>
+        <Link to='/' className='logo  header__logo'><img className='logo__pic' src={logo} alt='Логотип приложения Movies' /></Link>
         <Navigation endpoints={endpoints}/>
       </header>
     </Route>

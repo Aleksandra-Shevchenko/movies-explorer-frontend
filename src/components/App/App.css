@@ -28,5 +28,12 @@
 }
 
 .app__link:hover{
+  cursor: pointer;
   opacity: .4;
+}
+
+.logo{
+  display: block;
+  height: 38px;
+  width: 38px;
 }
