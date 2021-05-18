@@ -12,7 +12,7 @@ function Login() {
       <Link to='/' className='logo'><img className='logo__pic' src={logo} alt='Логотип приложения Movies' /></Link>
       <h2 className='entrance__title'>Рады видеть!</h2>
       <form className='entrance__form'>
-        <label for='email' className='entrance__label'>E-mail
+        <label className='entrance__label'>E-mail
           <input
             // value={email || ''}
             // onChange={handleChangeEmail}
@@ -27,7 +27,7 @@ function Login() {
           <span id='email-error' className='entrance__error'></span>
         </label>
         
-        <label for='password' className='entrance__label'>Пароль
+        <label className='entrance__label'>Пароль
           <input
             // value={password}
             // onChange={handleChangePassword}

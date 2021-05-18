@@ -25,6 +25,7 @@
 .app__link{
   text-decoration: none;
   transition: opacity .3s ease-in;
+  color: inherit;
 }
 
 .app__link:hover{
@@ -36,4 +37,10 @@
   display: block;
   height: 38px;
   width: 38px;
+}
+
+@media screen and (max-width: 769px){
+  .app {
+    padding: 0 30px;
+  }
 }

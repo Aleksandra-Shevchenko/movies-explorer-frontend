@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './Profile.css';
 
 
@@ -23,7 +24,7 @@ function Profile() {
       <div className='profile__box'>
         <h2 className='profile__title'>{`Привет, ${userName}!`}</h2>
         <form className='profile__form'>
-          <label className='profile__input-name'>Имя
+          <label className='profile__label'>Имя
             <input
               value={name || ''}
               onChange={handleChangeName}
@@ -37,7 +38,7 @@ function Profile() {
             />
             <span id="name-error" className='profile__error'></span>
           </label>
-          <label className='profile__input-name'>Email
+          <label className='profile__label'>Email
             <input
               value={email || ''}
               onChange={handleChangeEmail}
@@ -51,8 +52,10 @@ function Profile() {
             />
             <span id='email-error' className='profile__error'></span>
           </label>
-            <button className='profile__btn profile__btn_type_submit' type='submit'>Редактировать</button>
-            <button className='profile__btn profile__btn_type_logout' type='button'>Выйти из аккаунта</button>
+            <button className='profile__btn profile__btn_type_submit app__link' type='submit'>Редактировать</button>
+            
+            {/* временная реализация кнопки с ссылкой внутри, только для тестирования верстки */}
+            <button className='profile__btn profile__btn_type_logout' type='button'><Link className='app__link' to='/'>Выйти из аккаунта</Link></button>
         </form>
 
       </div>

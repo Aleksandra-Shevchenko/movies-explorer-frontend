@@ -4,7 +4,6 @@ import './MoviesCardList.css';
 
 function MoviesCardList(props) {
   
-  
   //---РАЗМЕТКА JSX---
   return (
     <section className='movies-list'>

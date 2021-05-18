@@ -1,7 +1,6 @@
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
-// import Preloader from '../Preloader/Preloader';
 
 
 function Movies({list}) {
@@ -10,7 +9,6 @@ function Movies({list}) {
   return (
     <section className='movies'>
       <SearchForm />
-      {/* <Preloader />  */}
       <MoviesCardList list={list}/>
     </section>
   );

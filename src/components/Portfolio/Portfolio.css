@@ -49,3 +49,10 @@
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (max-width: 1023px){
+  .portfolio__name{
+    font-size: 28px;
+    line-height: 1.78;
+  }
+}

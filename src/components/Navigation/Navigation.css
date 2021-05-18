@@ -28,6 +28,12 @@
     line-height: 1.33;
     color: #000;
     margin-right: 30px;
+    width: 76px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
 }
 
 .menu__link:last-of-type{
@@ -35,14 +41,8 @@
 }
 
 .menu__link_type_signin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 76px;
-    height: 32px;
     background-color: #000;
     color: #fff;
-    border-radius: 3px;
     margin: 0;
 }
 
