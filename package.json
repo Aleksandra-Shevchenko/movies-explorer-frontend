@@ -1,5 +1,10 @@
 {
+  "homepage": "./",
   "name": "movies-explorer-frontend",
+  "author": {
+    "name": "Aleksandra Shevchenko",
+    "email": "shevdor@yandex.ru"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
