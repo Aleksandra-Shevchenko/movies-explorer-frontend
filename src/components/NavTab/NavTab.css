@@ -11,6 +11,7 @@
 }
 
 .navigation__item{
+  display: flex;
   background-color: #e8e8e8;
   height: 36px;
   min-width: 96px;
@@ -38,4 +39,19 @@
   font-size: 12px;
   line-height: 36px;
   color: #fff;
+}
+
+@media screen and (max-width: 425px){
+  .navigation__item{
+    height: 26px;
+    min-width: 82px;
+    margin-right: 6px;
+    border-radius: 6px;
+  }
+
+  .navigation__link{
+    font-size: 10px;
+    line-height: 26px;
+    border-radius: 6px;
+  }
 }

@@ -32,3 +32,22 @@
     padding: 90px 20px;
   }
 }
+
+@media screen and (max-width: 650px){
+  .content__section{
+    padding: 70px 0;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .content{
+    padding-top: 14px;
+  }
+
+  .content__title{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    padding: 0 0 28px;
+  }
+}

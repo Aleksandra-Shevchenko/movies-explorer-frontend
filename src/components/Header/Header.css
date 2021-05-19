@@ -3,6 +3,7 @@
   box-sizing: border-box;
   display: flex;
   padding: 18px 30px;
+  z-index: 3;
 }
 
 .header__logo{

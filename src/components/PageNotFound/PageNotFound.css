@@ -38,3 +38,14 @@
   color: #000;
   text-decoration: none;
 }
+
+
+@media screen and (max-width: 769px){
+  .notfound__link{
+    margin-top: 184px;
+  }
+
+  .notfound__desc{
+    flex-grow: 0;
+  }
+}

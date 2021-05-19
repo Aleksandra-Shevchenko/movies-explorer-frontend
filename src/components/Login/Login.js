@@ -42,7 +42,7 @@ function Login() {
           <span id='password-error' className='entrance__error'></span>
         </label>
 
-        <button className='entrance__submit-btn app__link' type='submit'>Войти</button>
+        <button className='entrance__submit-btn app__link entrance__login-btn' type='submit'>Войти</button>
         <p className='entrance__subtitle'>Ещё не зарегистрированы?<Link to='signup' className='entrance__link app__link'>Регистрация</Link></p>
 
       </form>

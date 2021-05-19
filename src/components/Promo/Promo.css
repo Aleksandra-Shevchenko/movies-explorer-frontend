@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px 0 30px;
+  padding: 30px 0;
 }
 
 .promo__title{
@@ -35,7 +35,25 @@
 
 @media screen and (max-width: 769px){
   .promo {
-    max-height: 834px;
     min-height: 90vh;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .promo__title{
+    font-size: 32px;
+    max-width: 420px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .promo {
+    padding: 17px 0;
+  }
+
+  .promo__title{
+    font-size: 29px;
+    line-height: 1.27;
+    max-width: 300px;
   }
 }
