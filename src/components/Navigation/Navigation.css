@@ -26,7 +26,7 @@
 }
 
 .menu__film-link_active{
-    font-weight: 500;   
+  font-weight: 500;   
 }
 
 .menu__link{
@@ -101,7 +101,6 @@
 }
 
 @media screen and (max-width: 769px){
-  
   .menu__btn{
     display: flex;
   }
@@ -148,7 +147,6 @@
   .menu__film-link{
     font-weight: 500;   
     font-size: 18px;
-    line-height: 22px;
     line-height: 1.22;
     padding-bottom: 4px;
     margin: 0 0 22px;
@@ -165,5 +163,11 @@
 
   .menu__link_type_profile{
     margin: auto 0 0 0;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .menu__box{
+    padding: 0 0 46px;
   }
 }

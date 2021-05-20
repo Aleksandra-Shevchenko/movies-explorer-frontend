@@ -73,6 +73,7 @@
 
 .profile__btn_type_logout{
   color: #FF4062;
+  font-weight: 500;
 }
 
 .profile__error{
@@ -115,5 +116,40 @@
 
   .profile__label:last-of-type{
     margin-bottom: 194px;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .profile{
+    align-items: stretch;
+    width: 340px;
+  }
+
+  .profile__box{
+    flex-grow: 1;
+  }
+
+  .profile__btn_type_submit{
+    margin-top: auto;
+  }
+  .profile__label:last-of-type{
+    margin-bottom: 0;
+  }
+}
+
+
+@media screen and (max-width: 425px){
+  .profile{
+    width: 260px;
+    padding: 70px 0 40px;
+  }
+
+  .profile__form{
+    margin-top: 80px;
+  }
+
+  .profile__btn{
+    font-size: 12px;
+    line-height: 1.25;
   }
 }

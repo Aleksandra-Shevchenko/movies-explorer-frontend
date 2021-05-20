@@ -154,3 +154,24 @@
     right: 7px;
   }
 }
+
+@media screen and (max-width: 650px){
+  .search-form{
+    padding: 60px 0 44px;
+  }
+  .search-form__input{
+    margin-bottom: 45px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .search-form__input{
+    font-size: 11px;
+    line-height: 1.63;
+  }
+  .search-form__filter-name{
+    font-size: 11px;
+    line-height: 1.63;
+    margin: 0 13px 0 0;
+  }
+}

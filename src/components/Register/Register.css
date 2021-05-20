@@ -108,3 +108,40 @@
     margin-top: 138px;
   }
 }
+
+@media screen and (max-width: 650px){
+  .entrance{
+    width: 300px;
+  }
+
+  .entrance__form{
+    flex-grow: 1;
+  }
+
+  .entrance__submit-btn{
+    margin-top: auto;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .entrance__login-btn{
+    margin-top: auto;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .entrance{
+    width: 260px;
+    align-items: center;
+    padding: 56px 0 30px;
+  }
+
+  .entrance__title{
+    margin: 50px 0 80px;
+  }
+  
+  .entrance__subtitle{
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
