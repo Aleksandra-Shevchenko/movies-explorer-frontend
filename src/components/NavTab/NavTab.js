@@ -1,5 +1,6 @@
 import './NavTab.css';
 
+
 function NavTab() {
 
   //---РАЗМЕТКА JSX---

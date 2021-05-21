@@ -1,5 +1,4 @@
 import './AboutProject.css';
-import '../Main/Main.css';
 
 
 function AboutProject() {

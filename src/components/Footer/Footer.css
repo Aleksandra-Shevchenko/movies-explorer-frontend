@@ -3,6 +3,7 @@
   box-sizing: border-box;
   padding: 79px 30px 20px;
   margin-top: auto;
+  color: #000;
 }
 
 .footer__title{
@@ -43,6 +44,7 @@
 .footer__link{
   font-size: 13px;
   line-height: 1.23;
+  color: #000;
 }
 
 .footer__item{

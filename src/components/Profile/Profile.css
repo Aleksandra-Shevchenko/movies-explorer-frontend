@@ -4,6 +4,7 @@
   flex-grow: 1;
   width: 410px;
   display: flex;
+  color: #000;
 }
 
 .profile__box{
@@ -72,6 +73,11 @@
 }
 
 .profile__btn_type_logout{
+  color: #FF4062;
+  font-weight: 500;
+}
+
+.profile__link{
   color: #FF4062;
   font-weight: 500;
 }

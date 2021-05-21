@@ -1,6 +1,5 @@
-import { Link, NavLink, Route } from 'react-router-dom';
 import './Navigation.css';
-import '../App/App.css';
+import { Link, NavLink, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 

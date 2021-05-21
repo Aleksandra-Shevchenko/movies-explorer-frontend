@@ -1,7 +1,4 @@
 import './Portfolio.css';
-import '../Main/Main.css';
-import '../App/App.css';
-
 import arrow from '../../images/arrow.svg';
 
 

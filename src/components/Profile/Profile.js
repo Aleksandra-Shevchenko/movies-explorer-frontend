@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Profile.css';
 
 
@@ -55,7 +55,7 @@ function Profile() {
             <button className='profile__btn profile__btn_type_submit app__link' type='submit'>Редактировать</button>
             
             {/* временная реализация кнопки с ссылкой внутри, только для тестирования верстки */}
-            <button className='profile__btn profile__btn_type_logout' type='button'><Link className='app__link' to='/'>Выйти из аккаунта</Link></button>
+            <button className='profile__btn profile__btn_type_logout' type='button'><Link className='profile__link app__link' to='/'>Выйти из аккаунта</Link></button>
         </form>
 
       </div>

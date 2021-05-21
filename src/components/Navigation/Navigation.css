@@ -3,6 +3,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  color: #000;
 }
 
 .menu__box{
@@ -10,6 +11,7 @@
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  margin-left: 44px;
 }
 
 .menu__film-link {
@@ -136,6 +138,7 @@
     flex-grow: 1;
     transition: right .5s ease-in;
     z-index: 3;
+    margin-left: 0;
   }
 
   .menu__box_open{

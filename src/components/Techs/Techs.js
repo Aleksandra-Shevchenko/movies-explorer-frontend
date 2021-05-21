@@ -1,5 +1,4 @@
 import './Techs.css';
-import '../Main/Main.css';
 
 function Techs() {
 

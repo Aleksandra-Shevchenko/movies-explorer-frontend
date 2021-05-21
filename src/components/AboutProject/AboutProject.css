@@ -1,8 +1,10 @@
+@import url(../Main/Main.css);
 
 .project__about{
   display: flex;
   justify-content: space-between;
   margin: 70px 0 110px;
+  color: #000;
 }
 
 .project__description{

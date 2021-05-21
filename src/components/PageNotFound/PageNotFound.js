@@ -1,5 +1,5 @@
-import { Link, useHistory } from "react-router-dom";
 import './PageNotFound.css';
+import { Link, useHistory } from "react-router-dom";
 
 
 function PageNotFound() {

@@ -14,19 +14,18 @@
 }
 
 .app__link-outside{
-  color: #000;
   text-decoration: none;
   transition: color .3s ease-in;
 }
 
 .app__link-outside:hover{
   color: #2be080;
+  cursor: pointer;
 }
 
 .app__link{
   text-decoration: none;
   transition: opacity .3s ease-in;
-  color: inherit;
 }
 
 .app__link:hover{
@@ -34,11 +33,6 @@
   opacity: .4;
 }
 
-.logo{
-  display: inline-block;
-  height: 38px;
-  width: 38px;
-}
 
 @media screen and (max-width: 769px){
   .app {

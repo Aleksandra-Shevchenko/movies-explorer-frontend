@@ -1,7 +1,11 @@
+@import url(../App/App.css);
+@import url(../Main/Main.css);
+
 .about-me{
   display: flex;
   justify-content: space-between;
   padding-top: 66px;
+  color: #000;
 }
 
 .about-me__text-box{
@@ -53,6 +57,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 1.2;
+  color: #000;
 }
 
 .about-me__photo-box{
