@@ -12,4 +12,4 @@
 
 ## Ссылки:
 * **Ссылка:** https://shev.movies.students.nomoredomains.icu,
-* **Ссылка на макет:** ,
+* **Ссылка на макет:** https://www.figma.com/file/b5srVSd4MKPPjhAIuV0AXT/Diploma-Copy?node-id=891%3A3857
