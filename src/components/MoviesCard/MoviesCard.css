@@ -13,6 +13,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.movie__info{
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 44px);
+  box-sizing: border-box;
+  margin-right: 14px;
 }
 
 .movie__title{
@@ -34,6 +44,7 @@
 }
 
 .movie__btn{
+  /* flex: none; */
   width: 30px;
   height: 30px;
   background-color: #F9F9F9;
@@ -78,7 +89,7 @@
 .movie__pic{
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   overflow: hidden;
 }

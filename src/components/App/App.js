@@ -14,11 +14,47 @@ import './App.css';
 
 // тестовый массив карточек для проверки верстки
 import { testArr } from '../../utils/testData';
+import React from 'react';
+import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
-  //---РАЗМЕТКА JSX---
 
+  // все фильмы
+  const [allMovies, setAllMovies] = React.useState([]);
+
+  function changeMovies(movies) {
+    movies.forEach(movie => {
+      if(!movie.image){
+        movie.image = "https://g2.dcdn.lt/images/pix/kinas-76443525.jpg"
+      } else {
+        movie.image = `https://api.nomoreparties.co${movie.image.url}`
+      }
+    });
+  }
+
+  function handleGetInitialMovies () {
+    moviesApi.getMovies()
+      .then((data) => {
+        changeMovies(data);
+        setAllMovies(data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+
+
+
+
+
+
+
+
+
+
+  //---РАЗМЕТКА JSX---
   return (
     <div className='app'>
 
@@ -30,7 +66,7 @@ function App() {
         </Route>
 
         <Route path='/movies'>
-          <Movies list={testArr}/>
+          <Movies movies={allMovies} onAllMovies={handleGetInitialMovies}/>
         </Route>
 
         <Route path='/saved-movies'>

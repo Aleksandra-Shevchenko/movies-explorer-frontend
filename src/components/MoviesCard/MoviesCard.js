@@ -9,6 +9,8 @@ function MoviesCard(props) {
     return `${hours}ч ${minutes}м`;
   };
 
+  console.log(props.card.image.url)
+
   //---РАЗМЕТКА JSX---
   return (
     <article className='movie'>
@@ -25,7 +27,7 @@ function MoviesCard(props) {
           aria-label='Сохранить в избранное'
         />
       </div>
-      <img className='movie__pic' src={props.card.image} alt='Фильм'/>
+      <img className='movie__pic' src={`${props.card.image}`} alt='Фильм'/>
     </article>
   );
 }

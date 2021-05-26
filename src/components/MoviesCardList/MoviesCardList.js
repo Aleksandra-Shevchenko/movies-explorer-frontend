@@ -10,7 +10,7 @@ function MoviesCardList(props) {
       <div className='movies-list__box'>
         {props.list.map((item) => (
           <MoviesCard
-            key={item.movieId}
+            key={item.id}
             card={item}
             savedPage={props.savedMoviesPage}
           />)
