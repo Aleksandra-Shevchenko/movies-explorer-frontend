@@ -12,8 +12,18 @@ export function filterMovies(movies, searchQuery, shortFilms) {
   return moviesByQuery;
 }
 
-export function filterShortMovies(movies, shortFilms = 'off'){
+export function filterShortMovies(movies){
   return movies.filter((item) => {
     return item.duration < 40;
   })
+}
+
+export function changeMovies(movies) {
+  movies.forEach(movie => {
+    if(!movie.image){
+      movie.image = "https://g2.dcdn.lt/images/pix/kinas-76443525.jpg"
+    } else {
+      movie.image = `https://api.nomoreparties.co${movie.image.url}`
+    }
+  });
 }

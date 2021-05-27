@@ -9,8 +9,6 @@ function MoviesCard(props) {
     return `${hours}ч ${minutes}м`;
   };
 
-  console.log(props.card.image.url)
-
   //---РАЗМЕТКА JSX---
   return (
     <article className='movie'>

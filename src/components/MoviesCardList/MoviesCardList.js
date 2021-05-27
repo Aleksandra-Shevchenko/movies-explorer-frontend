@@ -3,7 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 
 function MoviesCardList(props) {
-  
+ 
   //---РАЗМЕТКА JSX---
   return (
     <section className='movies-list'>

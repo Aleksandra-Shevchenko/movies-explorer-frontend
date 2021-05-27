@@ -15,43 +15,35 @@ import './App.css';
 // тестовый массив карточек для проверки верстки
 import { testArr } from '../../utils/testData';
 import React from 'react';
-import moviesApi from '../../utils/MoviesApi';
+// import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
 
   // все фильмы
-  const [allMovies, setAllMovies] = React.useState([]);
-
-  function changeMovies(movies) {
-    movies.forEach(movie => {
-      if(!movie.image){
-        movie.image = "https://g2.dcdn.lt/images/pix/kinas-76443525.jpg"
-      } else {
-        movie.image = `https://api.nomoreparties.co${movie.image.url}`
-      }
-    });
-  }
-
-  function handleGetInitialMovies () {
-    moviesApi.getMovies()
-      .then((data) => {
-        changeMovies(data);
-        setAllMovies(data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
+  // const [allMovies, setAllMovies] = React.useState([]);
 
 
+  // function changeMovies(movies) {
+  //   movies.forEach(movie => {
+  //     if(!movie.image){
+  //       movie.image = "https://g2.dcdn.lt/images/pix/kinas-76443525.jpg"
+  //     } else {
+  //       movie.image = `https://api.nomoreparties.co${movie.image.url}`
+  //     }
+  //   });
+  // }
 
-
-
-
-
-
-
+  // function handleGetInitialMovies () {
+  //   moviesApi.getMovies()
+  //     .then((data) => {
+  //       changeMovies(data);
+  //       setAllMovies(data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
 
 
   //---РАЗМЕТКА JSX---
@@ -66,7 +58,7 @@ function App() {
         </Route>
 
         <Route path='/movies'>
-          <Movies movies={allMovies} onAllMovies={handleGetInitialMovies}/>
+          <Movies  />
         </Route>
 
         <Route path='/saved-movies'>

@@ -4,8 +4,6 @@ import React from 'react';
 function SearchForm(props) {
 
   const [value, setValue] = React.useState('');
-  // const [shortFilms, setShortFilms] = React.useState('off');
-	
 
   //---ОБРАБОТЧИКИ---
   function handleChangeValue(e) {
@@ -15,7 +13,15 @@ function SearchForm(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.onSearchClick(value);
-  } 
+  }
+
+  //---ЭФФЕКТЫ---
+  React.useEffect(() => {
+    const input = localStorage.getItem('searchQuery');
+    if(input){
+      setValue(input);
+    }
+  }, [])
 
 
   return (
