@@ -2,7 +2,6 @@
 const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 // --- КЛАСС ДЛЯ ОТПРАВКИ ЗАПРОСА НА СТОРОННИЙ СЕРВЕР ---
-
 class MoviesApi {
   constructor({
     moviesUrl,

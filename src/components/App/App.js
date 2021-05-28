@@ -1,4 +1,5 @@
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -9,82 +10,165 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import * as auth from '../../utils/auth';
 
 import './App.css';
 
 // тестовый массив карточек для проверки верстки
 import { testArr } from '../../utils/testData';
 import React from 'react';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import mainApi from '../../utils/MainApi';
 // import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
+  const history = useHistory();
+  
+  //состояния авторизации пользователя и его данных
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  // const [email, setEmail] = React.useState('');
+  // const [name, setName] = React.useState('');
 
-  // все фильмы
-  // const [allMovies, setAllMovies] = React.useState([]);
+  //при загрузке если получаем пользователя то перенаправляем его
+  React.useEffect(() => {
+    mainApi.getUserData()
+      .then(data => {
+        handleLoggedIn();
+        // setEmail(data.email);
+        setCurrentUser(data);
+        // history.push('/movies');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [history, loggedIn]);
 
 
-  // function changeMovies(movies) {
-  //   movies.forEach(movie => {
-  //     if(!movie.image){
-  //       movie.image = "https://g2.dcdn.lt/images/pix/kinas-76443525.jpg"
-  //     } else {
-  //       movie.image = `https://api.nomoreparties.co${movie.image.url}`
-  //     }
-  //   });
-  // }
 
-  // function handleGetInitialMovies () {
-  //   moviesApi.getMovies()
-  //     .then((data) => {
-  //       changeMovies(data);
-  //       setAllMovies(data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
 
+
+  //---ОБРАБОТЧИКИ---
+  function handleLoggedIn() {
+    setLoggedIn(true);
+  }
+
+  //обработчик регистрации пользователя
+  function handleRegister(name, email, password){
+    auth.register(name, email, password)
+      .then(data => {
+        if(data){
+          // handleInfoTooltip(true);
+          console.log(data)
+          handleLogin(data.email, password);
+        } 
+      })
+      .catch(err => {
+        console.log(err);
+        // handleInfoTooltip(false);
+      })
+  }
+
+  //обработчик авторизации пользователя
+  function handleLogin(email, password) {
+    auth.login(email, password)
+      .then(res => {
+        // setEmail(email);
+        handleLoggedIn();
+        history.push('/movies');
+      })
+      .catch(err => {
+        // handleInfoTooltip(false);
+        console.log(err);
+      })
+  }
+
+  //обработчик выхода пользователя
+  function handleSignOut() {
+    auth.signout()
+      .then(res => {
+        setLoggedIn(false);
+        // setEmail('');
+        history.push('/');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  //изменение данных пользователя
+  function handleUpdateUser(name, email) {
+    // setRenderSaving(true);
+    mainApi.updateUserProfile(name, email)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .catch(err => console.log(err))
+      // .finally(() => setRenderSaving(false));
+  }
 
   //---РАЗМЕТКА JSX---
   return (
-    <div className='app'>
+    <CurrentUserContext.Provider value={currentUser}>
 
-      <Header />
+      <div className='app'>
 
-      <Switch>
-        <Route path='/' exact>
-          <Main />
-        </Route>
+        <Header loggedIn={loggedIn}/>
 
-        <Route path='/movies'>
-          <Movies  />
-        </Route>
+        <Switch>
+          <ProtectedRoute
+            exact path='/movies'
+            loggedIn={loggedIn}
+            component={Movies}
+          />
 
-        <Route path='/saved-movies'>
-          <SavedMovies list={testArr}/>
-        </Route>
+          <ProtectedRoute
+            exact path='/saved-movies'
+            loggedIn={loggedIn}
+            component={SavedMovies}
+            list={testArr}
+          />
 
-        <Route path='/profile'>
-          <Profile />
-        </Route>
+          <ProtectedRoute
+            exact path='/profile'
+            loggedIn={loggedIn}
+            component={Profile}
+            onSignOut={handleSignOut}
+            onUpdate={handleUpdateUser}
+          />
 
-        <Route path='/signup'>
-          <Register />
-        </Route>
+          <Route path='/' exact>
+            <Main />
+          </Route>
 
-        <Route path='/signin'>
-          <Login />
-        </Route>
+          <Route path='/signup'>
+            <Register onRegister={handleRegister}/>
+          </Route>
 
-        <Route path="*">
-          <PageNotFound />
-        </Route>
-      </Switch>
+          <Route path='/signin'>
+            <Login onLogin={handleLogin}/>
+          </Route>
 
-      <Footer />
+          <Route path="*">
+            <PageNotFound />
+          </Route>
 
-    </div>
+          {/* <Route>
+            {loggedIn ? (
+              <Redirect to='/movies' />
+            ) : (
+              <Redirect to='/' />
+            )}
+          </Route> */}
+
+        </Switch>
+
+        <Footer />
+
+      </div>
+    </CurrentUserContext.Provider>
+
   );
 }
 

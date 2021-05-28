@@ -3,6 +3,10 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 
 function MoviesCardList(props) {
+
+  // function noMovies(list){
+  //   list.length ?  : 'ничего не найдено'
+  // }
  
   //---РАЗМЕТКА JSX---
   return (

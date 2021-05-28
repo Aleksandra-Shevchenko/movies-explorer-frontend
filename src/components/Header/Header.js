@@ -4,16 +4,16 @@ import Navigation from '../Navigation/Navigation';
 import Logo from '../Logo/Logo';
 
 
-function Header() {
+function Header(props) {
 
-  const endpoints = ['/movies', '/saved-movies', '/profile'];
+  const endpoints = ['/movies', '/saved-movies', '/profile', '/'];
 
   //---РАЗМЕТКА JSX---
   return (
-    <Route exact path={endpoints.concat('/')}>
+    <Route exact path={endpoints}>
       <header className='header'>
         <Logo />
-        <Navigation endpoints={endpoints}/>
+        <Navigation loggedIn={props.loggedIn}/>
       </header>
     </Route>
   );
