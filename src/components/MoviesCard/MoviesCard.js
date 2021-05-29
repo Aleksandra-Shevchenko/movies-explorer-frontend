@@ -9,6 +9,16 @@ function MoviesCard(props) {
     return `${hours}ч ${minutes}м`;
   };
 
+  //обработчик клика по кнопке лайка
+  function handleLikeClick() {
+    props.onLike(props.card);
+  }
+
+  //обработчик клика по кнопке удаления
+  function handleDeleteClick() {
+    props.onDelete(props.card);
+  }
+
   //---РАЗМЕТКА JSX---
   return (
     <article className='movie'>
@@ -20,12 +30,13 @@ function MoviesCard(props) {
         <button
           className={`movie__btn
           ${props.savedPage ? 'movie__delete-btn' : 'movie__save-btn'} 
-          ${props.card.owner === 1 && !props.savedPage ? 'movie__save-btn_active' : null}`}
+          ${props.liked && !props.savedPage ? 'movie__save-btn_active' : null}`}
           type='button'
           aria-label='Сохранить в избранное'
+          onClick={props.savedPage || props.liked ? handleDeleteClick : handleLikeClick}
         />
       </div>
-      <img className='movie__pic' src={`${props.card.image}`} alt='Фильм'/>
+      <a className='movie__link' href={props.card.trailer || props.card.trailerLink} target='_blank' rel='noreferrer'><img className='movie__pic' src={`${props.card.image}`} alt='Фильм'/></a>
     </article>
   );
 }

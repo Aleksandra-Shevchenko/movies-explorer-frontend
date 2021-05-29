@@ -1,26 +1,59 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
+import { getSavedMovieCard } from '../../utils/utils';
 
 
 function MoviesCardList(props) {
 
-  // function noMovies(list){
-  //   list.length ?  : 'ничего не найдено'
-  // }
- 
+  function getSavedMoviesPage() {
+    return props.list.map((item) => (
+      <MoviesCard
+        key={item._id}
+        card={item}
+        savedPage={props.savedMoviesPage}
+        onDelete={props.onDelete}
+      />
+    ))
+  }
+
+  function getInitialMoviesPage() {
+    return props.list.map((item) => {
+
+      const likedMovie = getSavedMovieCard(props.savedMovies, item.id);
+      const likedMovieId = likedMovie ? likedMovie._id : null;
+
+      return (
+        <MoviesCard
+          key={item.id}
+          card={{ ...item, _id: likedMovieId }}
+          onLike={props.onLike}
+          onDelete={props.onDelete}
+          liked={likedMovie ? true : false}
+        />)
+    })
+  }
+   
   //---РАЗМЕТКА JSX---
   return (
     <section className='movies-list'>
-      <div className='movies-list__box'>
-        {props.list.map((item) => (
-          <MoviesCard
-            key={item.id}
-            card={item}
-            savedPage={props.savedMoviesPage}
-          />)
-        )}
-      </div>
-      <button className='movies-list__more-btn' type='button' aria-label='Показать еще'>Ещё</button>
+      {props.isLoading ?  (
+        <Preloader />
+      ) : (
+        <>
+          <div className='movies-list__box'>
+            {props.savedMoviesPage ? getSavedMoviesPage() : getInitialMoviesPage()}
+          </div>
+          <button
+            className={`movies-list__more-btn 
+              ${props.savedMoviesPage && 'movies-list__more-btn_disabled'}`}
+            type='button'
+            aria-label='Показать еще'
+          >
+            Ещё
+          </button>
+       </>
+      )}
     </section>
   );
 }

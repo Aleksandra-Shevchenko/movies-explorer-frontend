@@ -17,11 +17,14 @@ function SearchForm(props) {
 
   //---ЭФФЕКТЫ---
   React.useEffect(() => {
-    const input = localStorage.getItem('searchQuery');
-    if(input){
-      setValue(input);
+    if(!props.savedMoviesPage){
+      
+      const input = localStorage.getItem('searchQuery');
+      if(input){
+        setValue(input);
+      }
     }
-  }, [])
+  }, [props.savedMoviesPage])
 
 
   return (

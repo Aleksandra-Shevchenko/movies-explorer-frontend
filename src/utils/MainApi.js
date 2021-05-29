@@ -2,7 +2,7 @@
 const BASE_URL = 'https://api.shev.movies.students.nomoredomains.icu';
 
 
-// --- КЛАСС ДЛЯ ОТПРАВКИ ЗАПРОСОВ НА НАЩ СЕРВЕР ПРИЛОЖЕНИЯ ---
+// --- КЛАСС ДЛЯ ОТПРАВКИ ЗАПРОСОВ НА СЕРВЕР ПРИЛОЖЕНИЯ ---
 
 class Api {
   constructor({
@@ -32,45 +32,7 @@ class Api {
       })
   }
 
-//   signout() {
-//     return fetch(`${this._baseUrl}/signout`,{
-//       method: 'POST',
-//       credentials: 'include',
-//       headers: {
-//         'Accept': 'application/json',
-//         authorization : this._token,
-//       }
-//     })
-//     .then(res => {
-//       if (res.ok) {
-//         return res.json;
-//       }
-//       return Promise.reject(`Ошибка: ${res.status}`);
-//     })
-//   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //метод сохранения отредактированных данных пользователя на сервере
+  // метод сохранения отредактированных данных пользователя на сервере
   updateUserProfile(name, email) {
     console.log(JSON.stringify({
         name: name,
@@ -80,6 +42,7 @@ class Api {
     return fetch(this._userUrl, {
         method: 'PATCH',
         headers: {
+          'Content-Type': 'application/json',
           authorization: this._token,
         },
         credentials: 'include',
@@ -97,14 +60,14 @@ class Api {
   }
 
 
-  //метод получения карточек с сервера
-  getSavedCards() {
+  // метод получения избранных пользователем фильмов с сервера
+  getUsersMovies() {
     return fetch(this._moviesUrl, {
       headers: {
         authorization: this._token,
       },
       credentials: 'include',
-      })
+    })
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -113,22 +76,41 @@ class Api {
       })
   }
 
-  //метод добавления новой карточки на сервер
-  postNewCard({
-    name,
-    link
+  // метод добавления нового фильма в избранное (создание карточки)
+  saveNewMovie({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    id,
   }) {
-    return fetch(this._cardsUrl, {
-        method: 'POST',
-        headers: {
-          authorization: this._token,
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          name: name,
-          link: link,
-        })
+    return fetch(this._moviesUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: this._token,
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image,
+        trailer: trailerLink,
+        nameRU,
+        nameEN,
+        thumbnail,
+        movieId: id,
       })
+    })
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -138,14 +120,14 @@ class Api {
   }
 
   //метод удаления карточки пользователя с сервера
-  deleteCard(cardId) {
-    return fetch(`${this._cardsUrl}/${cardId}`, {
-        method: 'DELETE',
-        headers: {
-          authorization: this._token,
-        },
-        credentials: 'include',
-      })
+  deleteMovie(movieId) {
+    return fetch(`${this._moviesUrl}/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+      },
+      credentials: 'include',
+    })
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -156,13 +138,13 @@ class Api {
 
   //метод постановки/удаления лайка на карточке
   changeLikeCardStatus(cardId, isNotLiked){
-      return fetch(`${this._cardsUrl}/${cardId}/likes`, {
-        method: isNotLiked ? "PUT" : "DELETE",
-        headers: {
-          authorization: this._token,
-        },
-        credentials: 'include',
-      })
+    return fetch(`${this._cardsUrl}/${cardId}/likes`, {
+      method: isNotLiked ? "PUT" : "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+      credentials: 'include',
+    })
       .then(res => {
         if (res.ok) {
           return res.json();

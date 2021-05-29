@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
@@ -38,7 +37,7 @@ function Profile(props) {
   return (
     <section className='profile'>
       <div className='profile__box'>
-        <h2 className='profile__title'>{`Привет, ${name}!`}</h2>
+        <h2 className='profile__title'>{`Привет, ${currentUser.name}!`}</h2>
         <form className='profile__form' onSubmit={handleSubmit}>
           <label className='profile__label'>Имя
             <input
