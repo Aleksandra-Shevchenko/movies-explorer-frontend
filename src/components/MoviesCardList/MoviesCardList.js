@@ -19,10 +19,8 @@ function MoviesCardList(props) {
 
   function getInitialMoviesPage() {
     return props.list.map((item) => {
-
       const likedMovie = getSavedMovieCard(props.savedMovies, item.id);
       const likedMovieId = likedMovie ? likedMovie._id : null;
-
       return (
         <MoviesCard
           key={item.id}
@@ -40,19 +38,23 @@ function MoviesCardList(props) {
       {props.isLoading ?  (
         <Preloader />
       ) : (
-        <>
-          <div className='movies-list__box'>
-            {props.savedMoviesPage ? getSavedMoviesPage() : getInitialMoviesPage()}
-          </div>
-          <button
-            className={`movies-list__more-btn 
-              ${props.savedMoviesPage && 'movies-list__more-btn_disabled'}`}
-            type='button'
-            aria-label='Показать еще'
-          >
-            Ещё
-          </button>
-       </>
+        props.isEmptyList ? (
+          <p className='movies-list__message'>Ничего не найдено</p>
+        ) : (
+          <>
+            <div className='movies-list__box'>
+              {props.savedMoviesPage ? getSavedMoviesPage() : getInitialMoviesPage()}
+            </div>
+            <button
+              className={`movies-list__more-btn 
+                ${(props.savedMoviesPage || props.isEmptyList) && 'movies-list__more-btn_disabled'}`}
+              type='button'
+              aria-label='Показать еще'
+            >
+              Ещё
+            </button>
+          </>
+        )
       )}
     </section>
   );

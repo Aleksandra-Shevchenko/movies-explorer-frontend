@@ -40,14 +40,14 @@ function App() {
       .then(data => {
         handleLoggedIn();
         setCurrentUser(data);
-        // history.push('/movies');
+        history.push('/movies');
         // пользователь должен перенаправляться туда где был
       })
       .catch(err => {
         console.log(err);
       })
       .finally(() => setIsLoaging(false))
-  }, [history, loggedIn]);
+  }, [history]);
 
   // при загрузке страницы получаем данные избранных пользователем фильмов
   React.useEffect(() => {
@@ -191,13 +191,13 @@ function App() {
                 <PageNotFound />
               </Route>
 
-              {/* <Route>
+              <Route>
                 {loggedIn ? (
                   <Redirect to='/movies' />
                 ) : (
                   <Redirect to='/' />
                 )}
-              </Route> */}
+              </Route>
 
             </Switch>
 

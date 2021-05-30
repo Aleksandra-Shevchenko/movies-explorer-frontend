@@ -1,30 +1,28 @@
 import './SearchForm.css';
 import React from 'react';
+import { useFormWithValidation } from '../../hooks/useForm';
+
 
 function SearchForm(props) {
 
-  const [value, setValue] = React.useState('');
-
-  //---ОБРАБОТЧИКИ---
-  function handleChangeValue(e) {
-    setValue(e.target.value);
-  }
+  const {values, errors, setValues, handleChange} = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSearchClick(value);
+    props.onSearchClick(values.query);
   }
 
   //---ЭФФЕКТЫ---
   React.useEffect(() => {
     if(!props.savedMoviesPage){
-      
       const input = localStorage.getItem('searchQuery');
       if(input){
-        setValue(input);
+        setValues({
+          query: input,
+        });
       }
     }
-  }, [props.savedMoviesPage])
+  }, [props.savedMoviesPage, setValues])
 
 
   return (
@@ -34,14 +32,17 @@ function SearchForm(props) {
           type='text'
           placeholder='Фильм'
           className='search-form__input'
-          value={value}
-          onChange={handleChangeValue}
+          name='query'
+          value={values.query || ''}
+          onChange={handleChange}
           required
         />
+        <span id='email-error' className='search-form__error'>
+          {errors.query || ''}
+        </span>
         <button
           className='search-form__btn'
           type='submit'
-          
         >
           Найти
         </button>

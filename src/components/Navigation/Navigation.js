@@ -8,8 +8,12 @@ function Navigation(props) {
   const [isClicked, setIsClicked] = useState(false);
 
   //---ОБРАБОТЧИКИ---
-  function handleClickMenu() {
-    setIsClicked(!isClicked)
+  function handleMenuOpen() {
+    setIsClicked(true)
+  }
+
+  function handleMenuClose() {
+    setIsClicked(false)
   }
 
   //---РАЗМЕТКА JSX---
@@ -18,24 +22,24 @@ function Navigation(props) {
       {props.loggedIn ? (
         <>
           <button
-            className={`menu__btn ${isClicked ? 'menu__btn_type_close' : 'menu__btn_type_burger'} `} onClick={handleClickMenu}>
+            className={`menu__btn ${isClicked ? 'menu__btn_type_close' : 'menu__btn_type_burger'} `} onClick={isClicked ? handleMenuClose : handleMenuOpen}>
           </button>
 
           <div className={`menu__box ${isClicked ? 'menu__box_open' : ''}`}>
             <NavLink exact to='/' activeClassName='menu__film-link_active' className='menu__film-link app__link'
-            onClick={handleClickMenu}>
+            onClick={handleMenuClose}>
               Главная
             </NavLink>
             <NavLink to='/movies' activeClassName='menu__film-link_active' className='menu__film-link app__link'
-            onClick={handleClickMenu}>
+            onClick={handleMenuClose}>
               Фильмы
             </NavLink>
             <NavLink to='/saved-movies' activeClassName='menu__film-link_active' className='menu__film-link app__link'
-            onClick={handleClickMenu}>
+            onClick={handleMenuClose}>
               Сохраненные фильмы
             </NavLink>
             <Link to='/profile' className='menu__link menu__link_type_profile app__link'
-            onClick={handleClickMenu}>
+            onClick={handleMenuClose}>
               Аккаунт
             </Link>
           </div>

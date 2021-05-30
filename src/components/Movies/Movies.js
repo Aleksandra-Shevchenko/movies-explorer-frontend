@@ -9,10 +9,12 @@ import moviesApi from '../../utils/MoviesApi';
 function Movies(props) {
 
   const forCheckbox = localStorage.getItem('shortFilms') === 'on' ? 'on' : 'off';
+  // const isEmptyMoviesList = JSON.parse(localStorage.getItem('movies')).length ? false : true;
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [shortFilms, setShortFilms] = React.useState(forCheckbox);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [allMovies, setAllMovies] = React.useState([]);
 
   const [isMoviesLoaging, setIsMoviesLoaging] = React.useState(false);
@@ -55,6 +57,15 @@ function Movies(props) {
     localStorage.setItem('shortFilms', e.target.value);
 	}
 
+  // обработчик устновки значения пустого запроса
+  function handleCheckFilteredMovies(arr) {
+    if (arr.length === 0) {
+      setIsNothingFound(true);
+    } else {
+      setIsNothingFound(false);
+    }
+	}
+
   //---ЭФФЕКТЫ---
   // проверяем есть ли данные в хранилище, и отрисовываем их
   React.useEffect(() => {
@@ -62,6 +73,7 @@ function Movies(props) {
     if(arr && !searchQuery){
       setShortFilms(localStorage.getItem('shortFilms'));
       setFilteredMovies(shortFilms === 'on' ? filterShortMovies(arr) : arr);
+      handleCheckFilteredMovies(arr);
     }
   }, [shortFilms, searchQuery])
 
@@ -70,6 +82,7 @@ function Movies(props) {
     if (searchQuery) {
       const arr = filterMovies(allMovies, searchQuery, shortFilms);
       setFilteredMovies(arr);
+      handleCheckFilteredMovies(arr);
     }
   }, [searchQuery, shortFilms, allMovies])
 
@@ -85,6 +98,7 @@ function Movies(props) {
         onLike={props.onLikeClick}
         onDelete={props.onDeleteClick}
         savedMovies={props.savedMoviesList}
+        isEmptyList={isNothingFound}
       />
     </section>
   );

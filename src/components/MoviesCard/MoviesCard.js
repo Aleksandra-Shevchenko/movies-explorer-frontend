@@ -30,7 +30,7 @@ function MoviesCard(props) {
         <button
           className={`movie__btn
           ${props.savedPage ? 'movie__delete-btn' : 'movie__save-btn'} 
-          ${props.liked && !props.savedPage ? 'movie__save-btn_active' : null}`}
+          ${props.liked && !props.savedPage ? 'movie__save-btn_active' : ''}`}
           type='button'
           aria-label='Сохранить в избранное'
           onClick={props.savedPage || props.liked ? handleDeleteClick : handleLikeClick}

@@ -98,7 +98,7 @@ class Api {
       },
       credentials: 'include',
       body: JSON.stringify({
-        country,
+        country: country || 'неизвестно',
         director,
         duration,
         year,

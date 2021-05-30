@@ -3,34 +3,19 @@ import './Entrance.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import React from 'react';
+import { useFormWithValidation } from '../../hooks/useForm';
 
 
 function Entrance(props) {
-  
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const {values, errors, isValid, handleChange} = useFormWithValidation();
 
-
-  //---ОБРАБОТЧИКИ---
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
-  
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-  }
 
   //---ОБРАБОТЧИКИ---
   function handleSubmit(e) {
     e.preventDefault();
     props.type === 'signup'
-      ? props.onSubmit(name, email, password)
-      : props.onSubmit(email, password);
+      ? props.onSubmit(values.name, values.email, values.password)
+      : props.onSubmit(values.email, values.password);
   }
 
   //---РАЗМЕТКА JSX---
@@ -49,10 +34,12 @@ function Entrance(props) {
               minLength='2'
               maxLength='30'
               required
-              value={name}
-              onChange={handleChangeName}
+              value={values.name || ''}
+              onChange={handleChange}
             />
-             <span id='name-error' className='entrance__error'></span>
+            <span id='name-error' className='entrance__error'>
+              {errors.name || ''}
+            </span>
             </label>
         )}
         <label className='entrance__label'>E-mail
@@ -64,10 +51,12 @@ function Entrance(props) {
             minLength='2'
             maxLength='30'
             required
-            value={email}
-            onChange={handleChangeEmail}
+            value={values.email || ''}
+            onChange={handleChange}
           />
-          <span id='email-error' className='entrance__error'></span>
+          <span id='email-error' className='entrance__error'>
+            {errors.email || ''}
+          </span>
         </label>
         <label className='entrance__label'>Пароль
           <input
@@ -78,15 +67,24 @@ function Entrance(props) {
             minLength='4'
             maxLength='20'
             required
-            value={password}
-            onChange={handleChangePassword}
+            value={values.password || ''}
+            onChange={handleChange}
           />
-          <span id='password-error' className='entrance__error'>Что-то пошло не так...</span>
+          <span id='password-error' className='entrance__error'>
+            {errors.password || ''}
+          </span>
         </label>
 
         <button
-          className={`entrance__submit-btn app__link ${props.type === 'signup' && 'entrance__login-btn'}`}
-          type='submit'>{props.btnName}
+          className={`entrance__submit-btn 
+            app__link
+            ${props.type === 'signup' && 'entrance__login-btn'}
+            ${!isValid && 'entrance__submit-btn_diabled'}`
+          }
+          type='submit'
+          disabled={!isValid}
+        >
+          {props.btnName}
         </button>
         <p className='entrance__subtitle'>{props.subtitle}<Link to={props.linkTo} className='entrance__link app__link'>{props.linkName}</Link></p>
       </form>

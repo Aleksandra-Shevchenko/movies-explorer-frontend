@@ -18,7 +18,7 @@ export function filterShortMovies(movies){
   })
 }
 
-// проверка данных на осутствие и преобразование
+// проверка ссылок изображении на осутствие и их преобразование
 export function changeMovies(movies) {
   movies.forEach(movie => {
     if(!movie.image){

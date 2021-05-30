@@ -10,6 +10,7 @@ function SavedMovies(props) {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [shortFilms, setShortFilms] = React.useState('off');
   const [filteredMovies, setFilteredMovies] = React.useState(props.list);
+  const [isNothingFound, setIsNothingFound] = React.useState(false);
 
 
   // обработчик отправки формы
@@ -28,15 +29,19 @@ function SavedMovies(props) {
   React.useEffect(() => {
     const arr = filterMovies(props.list, searchQuery, shortFilms);
     setFilteredMovies(arr);
+    if (arr.length === 0) {
+      setIsNothingFound(true);
+    } else {
+      setIsNothingFound(false);
+    }
   }, [searchQuery, shortFilms, props.list])
-
 
 
   // ---РАЗМЕТКА JSX---
   return (
     <section className='saved-movies'>
       <SearchForm onSearchClick={handleSearchSubmit} onCheckbox={handleShortFilms} shortFilms={shortFilms} savedMoviesPage={true}/>
-      <MoviesCardList list={filteredMovies} savedMoviesPage={true} onDelete={props.onDeleteClick}/>
+      <MoviesCardList list={filteredMovies} savedMoviesPage={true} onDelete={props.onDeleteClick} isEmptyList={isNothingFound}/>
     </section>
   );
 }
