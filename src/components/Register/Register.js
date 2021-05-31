@@ -2,7 +2,7 @@ import './Register.css';
 import Entrance from '../Entrance/Entrance';
 
 
-function Register({ onRegister }){
+function Register({ onRegister, infoMessage }){
 
     //---РАЗМЕТКА JSX---
   return (
@@ -14,6 +14,7 @@ function Register({ onRegister }){
       subtitle='Уже зарегестрированы?'
       linkName='Войти'
       onSubmit={onRegister}
+      infoMessage={infoMessage}
     >
     </Entrance>
   )

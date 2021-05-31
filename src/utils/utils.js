@@ -1,8 +1,15 @@
+
+// ф-ия фильтрации фильмов по длительности
+export function filterShortMovies(movies){
+  return movies.filter((item) => item.duration < 40);
+}
+
+// ф-ия фильтрации фильмов по запросу и длительности
 export function filterMovies(movies, searchQuery, shortFilms) {
   const moviesByQuery =  movies.filter((item) => {
     const strRu = String(item.nameRU).toLowerCase();
     const strEn = String(item.nameEN).toLowerCase();
-    const searchStr = searchQuery.toLowerCase();
+    const searchStr = searchQuery.toLowerCase().trim();
     return (strRu.indexOf(searchStr) !== -1 || strEn.indexOf(searchStr) !== -1);
   });
 
@@ -12,17 +19,12 @@ export function filterMovies(movies, searchQuery, shortFilms) {
   return moviesByQuery;
 }
 
-export function filterShortMovies(movies){
-  return movies.filter((item) => {
-    return item.duration < 40;
-  })
-}
-
-// проверка ссылок изображении на осутствие и их преобразование
+// ф-ия проверки ссылок изображений на осутствие и их преобразование
 export function changeMovies(movies) {
   movies.forEach(movie => {
     if(!movie.image){
-      movie.image = "https://g2.dcdn.lt/images/pix/kinas-76443525.jpg"
+      movie.image = 'https://g2.dcdn.lt/images/pix/kinas-76443525.jpg';
+      movie.thumbnail = 'https://g2.dcdn.lt/images/pix/kinas-76443525.jpg'
     } else {
       movie.thumbnail = `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
       movie.image = `https://api.nomoreparties.co${movie.image.url}`

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import React from 'react';
 import { useFormWithValidation } from '../../hooks/useForm';
+import InfoMessage from '../InfoMessage/InfoMessage';
 
 
 function Entrance(props) {
@@ -34,11 +35,12 @@ function Entrance(props) {
               minLength='2'
               maxLength='30'
               required
+              pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
               value={values.name || ''}
               onChange={handleChange}
             />
             <span id='name-error' className='entrance__error'>
-              {errors.name || ''}
+              {errors.name ? 'поле должно быть заполнено и может содержать только латиницу, кириллицу, пробел или дефис' : ''}
             </span>
             </label>
         )}
@@ -74,6 +76,8 @@ function Entrance(props) {
             {errors.password || ''}
           </span>
         </label>
+
+        <InfoMessage {...props.infoMessage} />
 
         <button
           className={`entrance__submit-btn 

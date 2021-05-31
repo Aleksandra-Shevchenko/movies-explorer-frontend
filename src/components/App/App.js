@@ -31,6 +31,13 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isLoaging, setIsLoaging] = React.useState(false);
 
+  // состояния уведомлений пользователя 
+  const [infoMessage, setInfoMessage] = React.useState({
+    isShown: false,
+    message: '',
+    code: 200,
+  });
+
 
   // ---ЭФФЕКТЫ---
   // при загрузке если получаем пользователя то перенаправляем его
@@ -47,7 +54,7 @@ function App() {
         console.log(err);
       })
       .finally(() => setIsLoaging(false))
-  }, [history]);
+  }, [history, loggedIn]);
 
   // при загрузке страницы получаем данные избранных пользователем фильмов
   React.useEffect(() => {
@@ -74,28 +81,29 @@ function App() {
     auth.register(name, email, password)
       .then(data => {
         if(data){
-          // handleInfoTooltip(true);
-          console.log(data)
+          console.log(data);
           handleLogin(data.email, password);
         } 
       })
       .catch(err => {
         console.log(err);
-        // handleInfoTooltip(false);
+        setInfoMessage({...infoMessage, isShown: true, message: err.message, code: err.statusCode, type: 'register'});
       })
   }
 
   // обработчик авторизации пользователя
   function handleLogin(email, password) {
+    setIsLoaging(true);
     auth.login(email, password)
       .then(res => {
         handleLoggedIn();
         history.push('/movies');
       })
       .catch(err => {
-        // handleInfoTooltip(false);
         console.log(err);
+        setInfoMessage({...infoMessage, isShown: true, message: err.message, code: err.statusCode, type: 'login'});
       })
+      .finally(() => setIsLoaging(false))
   }
 
   // обработчик выхода пользователя
@@ -116,8 +124,12 @@ function App() {
     mainApi.updateUserProfile(name, email)
       .then(data => {
         setCurrentUser(data);
+        setInfoMessage({...infoMessage, isShown: true, type: 'profile'});
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        setInfoMessage({...infoMessage, isShown: true, message: err.message, code: err.statusCode, type: 'profile'});
+      })
   }
 
   // обработчик добавления фильма в избранное
@@ -139,10 +151,17 @@ function App() {
       .catch(err => console.log(err))
   }
 
+
+  function handleClickResetInfoMessage() {
+    if (infoMessage.isShown){
+      setInfoMessage({...infoMessage, isShown: false, message: '', type: '', code: 200});
+    }
+  }
+
   // ---РАЗМЕТКА JSX---
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className='app'>
+      <div className='app' onClick={handleClickResetInfoMessage}>
         {isLoaging ? (
           <Preloader/>
         ) : (
@@ -173,6 +192,7 @@ function App() {
                 component={Profile}
                 onSignOut={handleSignOut}
                 onUpdate={handleUpdateUser}
+                infoMessage={infoMessage}
               />
 
               <Route path='/' exact>
@@ -180,11 +200,11 @@ function App() {
               </Route>
 
               <Route path='/signup'>
-                <Register onRegister={handleRegister}/>
+                <Register onRegister={handleRegister} infoMessage={infoMessage}/>
               </Route>
 
               <Route path='/signin'>
-                <Login onLogin={handleLogin}/>
+                <Login onLogin={handleLogin} infoMessage={infoMessage}/>
               </Route>
 
               <Route path="*">

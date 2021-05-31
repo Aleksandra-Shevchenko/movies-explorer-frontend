@@ -34,11 +34,6 @@ class Api {
 
   // метод сохранения отредактированных данных пользователя на сервере
   updateUserProfile(name, email) {
-    console.log(JSON.stringify({
-        name: name,
-        email: email,
-      }));
-
     return fetch(this._userUrl, {
         method: 'PATCH',
         headers: {
@@ -52,10 +47,7 @@ class Api {
         })
       })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
       })
   }
 
@@ -98,15 +90,15 @@ class Api {
       },
       credentials: 'include',
       body: JSON.stringify({
-        country: country || 'неизвестно',
+        country: country || 'no country',
         director,
         duration,
         year,
         description,
         image,
         trailer: trailerLink,
-        nameRU,
-        nameEN,
+        nameRU: nameRU || 'no name',
+        nameEN: nameEN || 'no name',
         thumbnail,
         movieId: id,
       })

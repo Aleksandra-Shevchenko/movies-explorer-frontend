@@ -30,6 +30,7 @@
   width: 100%;
   margin-top: 107px;
   overflow: hidden;
+  position: relative;
 }
 
 .profile__label{
@@ -44,13 +45,14 @@
 
 .profile__label:last-of-type{
   border-bottom: none;
+  margin-top: 6px;
 }
 
 .profile__input{
   border: none;
   background-color: transparent;
   text-align: end;
-  padding: 16px 0;
+  padding: 18px 0;
   font-style: inherit;
   font-weight: 400;
   font-size: 11px;

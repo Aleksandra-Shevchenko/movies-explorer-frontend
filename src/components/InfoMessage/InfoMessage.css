@@ -1,0 +1,16 @@
+.message{
+  position: absolute;
+  /* bottom: 86px; */
+  bottom: 11%;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.message__text{
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FF004C;
+  text-align: center;
+}

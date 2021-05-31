@@ -1,6 +1,7 @@
 import React from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/useForm';
+import InfoMessage from '../InfoMessage/InfoMessage';
 
 import './Profile.css';
 
@@ -51,10 +52,12 @@ function Profile(props) {
               minLength='2'
               maxLength='30'
               required
+              title='Разрешено использовать латиницу, кириллицу, пробел или дефис'
+              pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
               id='name'
             />
             <span id="name-error" className='profile__error'>
-              {errors.name || ''}
+              {errors.name ? 'поле должно быть заполнено и может содержать только латиницу, кириллицу, пробел или дефис' : ''}
             </span>
           </label>
           <label className='profile__label'>Email
@@ -73,6 +76,9 @@ function Profile(props) {
               {errors.email || ''}
             </span>
           </label>
+
+          <InfoMessage {...props.infoMessage} />
+          
           <button
             className={`profile__btn profile__btn_type_submit app__link
             ${!isValid && 'profile__btn_disabled'}`}

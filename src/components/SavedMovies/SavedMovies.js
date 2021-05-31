@@ -29,10 +29,8 @@ function SavedMovies(props) {
   React.useEffect(() => {
     const arr = filterMovies(props.list, searchQuery, shortFilms);
     setFilteredMovies(arr);
-    if (arr.length === 0) {
-      setIsNothingFound(true);
-    } else {
-      setIsNothingFound(false);
+    if(searchQuery){
+      arr.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
     }
   }, [searchQuery, shortFilms, props.list])
 

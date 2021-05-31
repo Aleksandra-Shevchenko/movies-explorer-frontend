@@ -9,7 +9,6 @@ import moviesApi from '../../utils/MoviesApi';
 function Movies(props) {
 
   const forCheckbox = localStorage.getItem('shortFilms') === 'on' ? 'on' : 'off';
-  // const isEmptyMoviesList = JSON.parse(localStorage.getItem('movies')).length ? false : true;
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [shortFilms, setShortFilms] = React.useState(forCheckbox);
@@ -59,15 +58,11 @@ function Movies(props) {
 
   // обработчик устновки значения пустого запроса
   function handleCheckFilteredMovies(arr) {
-    if (arr.length === 0) {
-      setIsNothingFound(true);
-    } else {
-      setIsNothingFound(false);
-    }
+    arr.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
 	}
 
   //---ЭФФЕКТЫ---
-  // проверяем есть ли данные в хранилище, и отрисовываем их
+  // проверяем есть ли данные в хранилище
   React.useEffect(() => {
     const arr = JSON.parse(localStorage.getItem('movies'));
     if(arr && !searchQuery){
@@ -95,10 +90,10 @@ function Movies(props) {
       <MoviesCardList
         isLoading={isMoviesLoaging}
         list={filteredMovies}
+        isEmptyList={isNothingFound}
         onLike={props.onLikeClick}
         onDelete={props.onDeleteClick}
         savedMovies={props.savedMoviesList}
-        isEmptyList={isNothingFound}
       />
     </section>
   );

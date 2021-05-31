@@ -1,7 +1,7 @@
 import './Login.css';
 import Entrance from "../Entrance/Entrance";
 
-function Login({ onLogin }){
+function Login({ onLogin, infoMessage }){
 
   //---РАЗМЕТКА JSX---
   return (
@@ -13,6 +13,7 @@ function Login({ onLogin }){
       subtitle='Ещё не зарегистрированы?'
       linkName='Регистрация'
       onSubmit={onLogin}
+      infoMessage={infoMessage}
     />
   )
 }
