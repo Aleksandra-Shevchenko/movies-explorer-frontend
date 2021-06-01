@@ -17,7 +17,6 @@ import React from 'react';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
-// import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
@@ -26,10 +25,12 @@ function App() {
   // состояния авторизации пользователя и его данных
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLoaging, setIsLoaging] = React.useState(true);
+
   
   // состояния фильмов пользователя
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [isLoaging, setIsLoaging] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
 
   // состояния уведомлений пользователя 
   const [infoMessage, setInfoMessage] = React.useState({
@@ -40,21 +41,19 @@ function App() {
 
 
   // ---ЭФФЕКТЫ---
-  // при загрузке если получаем пользователя то перенаправляем его
+  // при загрузке если получаем пользователя то обновляем стейты
   React.useEffect(() => {
-    setIsLoaging(true)
+    setIsLoaging(true);
     mainApi.getUserData()
       .then(data => {
         handleLoggedIn();
         setCurrentUser(data);
-        history.push('/movies');
-        // пользователь должен перенаправляться туда где был
       })
       .catch(err => {
         console.log(err);
       })
       .finally(() => setIsLoaging(false))
-  }, [history, loggedIn]);
+  }, []);
 
   // при загрузке страницы получаем данные избранных пользователем фильмов
   React.useEffect(() => {
@@ -62,14 +61,14 @@ function App() {
       mainApi.getUsersMovies()
       .then((data) => {
         setSavedMovies(data);
+        setIsError(false);
       })
       .catch(err => {
+        setIsError(true);
         console.log(err);
       })
     }
   }, [loggedIn]);
-
-
 
   // ---ОБРАБОТЧИКИ---
   function handleLoggedIn() {
@@ -86,7 +85,6 @@ function App() {
         } 
       })
       .catch(err => {
-        console.log(err);
         setInfoMessage({...infoMessage, isShown: true, message: err.message, code: err.statusCode, type: 'register'});
       })
   }
@@ -100,7 +98,6 @@ function App() {
         history.push('/movies');
       })
       .catch(err => {
-        console.log(err);
         setInfoMessage({...infoMessage, isShown: true, message: err.message, code: err.statusCode, type: 'login'});
       })
       .finally(() => setIsLoaging(false))
@@ -127,7 +124,6 @@ function App() {
         setInfoMessage({...infoMessage, isShown: true, type: 'profile'});
       })
       .catch(err => {
-        console.log(err);
         setInfoMessage({...infoMessage, isShown: true, message: err.message, code: err.statusCode, type: 'profile'});
       })
   }
@@ -161,7 +157,7 @@ function App() {
   // ---РАЗМЕТКА JSX---
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className='app' onClick={handleClickResetInfoMessage}>
+      <div className='app' onClick={infoMessage.isShown ? handleClickResetInfoMessage : null}>
         {isLoaging ? (
           <Preloader/>
         ) : (
@@ -184,6 +180,7 @@ function App() {
                 component={SavedMovies}
                 list={savedMovies}
                 onDeleteClick={handleDeleteMovie}
+                isError={isError}
               />
 
               <ProtectedRoute
@@ -200,23 +197,24 @@ function App() {
               </Route>
 
               <Route path='/signup'>
-                <Register onRegister={handleRegister} infoMessage={infoMessage}/>
+                {loggedIn ? <Redirect to='/movies' /> : <Register onRegister={handleRegister} infoMessage={infoMessage}/>}
               </Route>
 
               <Route path='/signin'>
-                <Login onLogin={handleLogin} infoMessage={infoMessage}/>
+                {loggedIn ? <Redirect to='/movies' /> : <Login onLogin={handleLogin} infoMessage={infoMessage}/>}
               </Route>
 
-              <Route path="*">
-                <PageNotFound />
-              </Route>
 
-              <Route>
+              {/* <Route>
                 {loggedIn ? (
                   <Redirect to='/movies' />
                 ) : (
                   <Redirect to='/' />
                 )}
+              </Route> */}
+
+              <Route path="*">
+                <PageNotFound />
               </Route>
 
             </Switch>

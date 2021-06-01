@@ -78,7 +78,6 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  margin-top: auto;
 }
 
 .entrance__submit-btn_diabled{
@@ -107,10 +106,6 @@
 
 
 @media screen and (max-width: 769px){
-  .entrance__submit-btn{
-    margin-top: 69px;
-  }
-
   .entrance__form{
     flex-grow: 0;
   }
@@ -130,7 +125,6 @@
   }
 
   .entrance__submit-btn{
-    margin-top: auto;
     font-size: 12px;
     line-height: 15px;
   }

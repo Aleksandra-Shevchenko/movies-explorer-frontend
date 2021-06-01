@@ -5,8 +5,9 @@ import { useFormWithValidation } from '../../hooks/useForm';
 
 function SearchForm(props) {
 
-  const {values, errors, setValues, handleChange} = useFormWithValidation();
+  const {values, errors, isValid, setValues, handleChange, setIsValid} = useFormWithValidation();
 
+  // ---ОБРАБОТЧИКИ---
   function handleSubmit(e) {
     e.preventDefault();
     props.onSearchClick(values.query);
@@ -17,12 +18,11 @@ function SearchForm(props) {
     if(!props.savedMoviesPage){
       const input = localStorage.getItem('searchQuery');
       if(input){
-        setValues({
-          query: input,
-        });
+        setValues({query : input});
+        setIsValid(true)
       }
     }
-  }, [props.savedMoviesPage, setValues])
+  }, [props.savedMoviesPage, setValues, setIsValid])
 
 
   return (
@@ -38,11 +38,12 @@ function SearchForm(props) {
           required
         />
         <span id='email-error' className='search-form__error'>
-          {errors.query || ''}
+          {errors.query ? 'Нужно ввести ключевое слово' : ''}
         </span>
         <button
           className='search-form__btn'
           type='submit'
+          disabled={!isValid}
         >
           Найти
         </button>

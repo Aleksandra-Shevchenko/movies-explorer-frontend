@@ -39,7 +39,13 @@ function SavedMovies(props) {
   return (
     <section className='saved-movies'>
       <SearchForm onSearchClick={handleSearchSubmit} onCheckbox={handleShortFilms} shortFilms={shortFilms} savedMoviesPage={true}/>
-      <MoviesCardList list={filteredMovies} savedMoviesPage={true} onDelete={props.onDeleteClick} isEmptyList={isNothingFound}/>
+      <MoviesCardList
+        list={filteredMovies}
+        savedMoviesPage={true}
+        onDelete={props.onDeleteClick}
+        isEmptyList={isNothingFound}
+        isError={props.isError}
+      />
     </section>
   );
 }

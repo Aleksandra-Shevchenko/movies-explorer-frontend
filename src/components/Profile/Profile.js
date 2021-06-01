@@ -88,9 +88,10 @@ function Profile(props) {
             {isValid ? 'Сохранить' : 'Редактировать'}
           </button>
             
-          <button className='profile__btn profile__btn_type_logout' type='button' onClick={props.onSignOut}>
-            Выйти из аккаунта
-          </button>
+          {!isValid && (
+            <button className='profile__btn profile__btn_type_logout' type='button' onClick={props.onSignOut}>
+              Выйти из аккаунта
+            </button>)}
         </form>
       </div>
       

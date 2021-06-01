@@ -36,7 +36,7 @@ function InfoMessage({isShown, message, code, type}) {
   return (
     <div className='message'>
       {isShown && (
-        <p className='message__text'>{textMessage}</p>
+        <p className={`message__text ${code === 200 && 'message__text_type_success'}`}>{textMessage}</p>
       )}
     </div>
   );

@@ -70,7 +70,7 @@
 }
 
 .profile__btn_type_submit{
-  margin-top: auto;
+  /* margin-top: auto; */
   margin-bottom: 6px;
   height: 45px;
   color:#fff;
@@ -133,9 +133,9 @@
     margin-top: 96px;
   }
 
-  .profile__btn_type_submit{
+  /* .profile__btn_type_submit{
     margin-top: 0;
-  }
+  } */
 
   .profile__label:last-of-type{
     margin-bottom: 194px;
@@ -152,9 +152,9 @@
     flex-grow: 1;
   }
 
-  .profile__btn_type_submit{
+  /* .profile__btn_type_submit{
     margin-top: auto;
-  }
+  } */
   .profile__label:last-of-type{
     margin-bottom: 0;
   }

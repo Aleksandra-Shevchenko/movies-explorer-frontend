@@ -73,6 +73,11 @@
   opacity: .4;
 }
 
+.search-form__btn:disabled{
+  opacity: .3;
+  cursor: default;
+}
+
 .search-form__filter-box{
   display: flex;
 }
@@ -96,15 +101,14 @@
   border-radius: 20px;
   padding: 6px;
   position: relative;
-  transition: transform .3s ease-in;
 }
 
 .search-form__filter_active{
   background-color: #2BE080;
 }
 
-.search-form__filter:hover{
-  transform: scale(1.2);
+.search-form__filter:hover .search-form__switch{
+  transform: scale(1.7);
 }
 
 .search-form__radio{
@@ -131,6 +135,7 @@
   position: relative;
   left: 0;
   z-index: 2;
+  transition: transform .3s ease-in;
 }
 
 .search-form__radio:checked ~ .search-form__switch{

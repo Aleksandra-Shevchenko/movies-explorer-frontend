@@ -3,7 +3,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import React from 'react';
 import { filterMovies, filterShortMovies, changeMovies} from '../../utils/utils';
-import moviesApi from '../../utils/MoviesApi';
+import * as moviesApi from  '../../utils/MoviesApi';
 
 
 function Movies(props) {
@@ -17,6 +17,8 @@ function Movies(props) {
   const [allMovies, setAllMovies] = React.useState([]);
 
   const [isMoviesLoaging, setIsMoviesLoaging] = React.useState(false);
+
+  const [isError, setIsError] = React.useState(false);
 
 
   // ф-я фильтрации массива и установки его в хранилище и стейт
@@ -41,6 +43,7 @@ function Movies(props) {
           handleSetFilteredMovies(data, value, shortFilms);
         })
         .catch(err => {
+          setIsError(true);
           console.log(err);
         })
         .finally(() => setIsMoviesLoaging(false))
@@ -94,6 +97,7 @@ function Movies(props) {
         onLike={props.onLikeClick}
         onDelete={props.onDeleteClick}
         savedMovies={props.savedMoviesList}
+        isError={isError}
       />
     </section>
   );
