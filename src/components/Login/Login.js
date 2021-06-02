@@ -15,7 +15,7 @@ function Login({ onLogin, infoMessage }){
       onSubmit={onLogin}
       infoMessage={infoMessage}
     />
-  )
-}
+  );
+};
  
 export default Login;

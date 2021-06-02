@@ -7,6 +7,7 @@ import Portfolio from '../Portfolio/Portfolio';
 
 
 function Main() {
+  
   //---РАЗМЕТКА JSX---
   return (
     <main className='content'>
@@ -17,6 +18,6 @@ function Main() {
         <Portfolio />
     </main>
   );
-}
+};
   
 export default Main;

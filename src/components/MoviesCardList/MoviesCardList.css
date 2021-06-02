@@ -51,13 +51,14 @@
   transition: color .4s ease-in, background-color .4s ease-in;
 }
 
-.movies-list__more-btn_disabled{
+.movies-list__more-btn_hidden{
   display: none;
 }
 
 .movies-list__more-btn:hover{
   background-color: #000;
   color: #fff;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1023px){

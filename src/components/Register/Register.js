@@ -4,7 +4,7 @@ import Entrance from '../Entrance/Entrance';
 
 function Register({ onRegister, infoMessage }){
 
-    //---РАЗМЕТКА JSX---
+  // ---РАЗМЕТКА JSX---
   return (
     <Entrance
       type='signup'
@@ -17,7 +17,7 @@ function Register({ onRegister, infoMessage }){
       infoMessage={infoMessage}
     >
     </Entrance>
-  )
-}
+  );
+};
   
 export default Register;

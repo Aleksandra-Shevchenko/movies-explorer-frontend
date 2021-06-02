@@ -4,19 +4,19 @@ import Navigation from '../Navigation/Navigation';
 import Logo from '../Logo/Logo';
 
 
-function Header(props) {
+function Header({ loggedIn }) {
 
   const endpoints = ['/movies', '/saved-movies', '/profile', '/'];
 
-  //---РАЗМЕТКА JSX---
+  // ---РАЗМЕТКА JSX---
   return (
     <Route exact path={endpoints}>
       <header className='header'>
         <Logo />
-        <Navigation loggedIn={props.loggedIn}/>
+        <Navigation loggedIn={loggedIn}/>
       </header>
     </Route>
   );
-}
+};
   
 export default Header;

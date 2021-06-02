@@ -1,8 +1,9 @@
+// ---ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ---
 
 // ф-ия фильтрации фильмов по длительности
 export function filterShortMovies(movies){
   return movies.filter((item) => item.duration < 40);
-}
+};
 
 // ф-ия фильтрации фильмов по запросу и длительности
 export function filterMovies(movies, searchQuery, shortFilms) {
@@ -17,7 +18,7 @@ export function filterMovies(movies, searchQuery, shortFilms) {
     return filterShortMovies(moviesByQuery);
   }
   return moviesByQuery;
-}
+};
 
 // ф-ия проверки ссылок изображений на осутствие и их преобразование
 export function changeMovies(movies) {
@@ -30,10 +31,18 @@ export function changeMovies(movies) {
       movie.image = `https://api.nomoreparties.co${movie.image.url}`
     }
   });
-}
+};
 
+// ф-ия получения сохраненной карточки фильма
 export function getSavedMovieCard(arr, id) {
   return arr.find((item) => {
     return item.movieId === id;
-  })
-}
+  });
+};
+
+// ф-ия преобразования времени
+export function getTimeFromMin(mins) {
+  const hours = Math.trunc(mins/60);
+  const minutes = mins % 60;
+  return `${hours}ч ${minutes}м`;
+};

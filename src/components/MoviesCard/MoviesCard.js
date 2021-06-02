@@ -1,44 +1,42 @@
 import './MoviesCard.css';
+import { getTimeFromMin } from '../../utils/utils';
 
 
-function MoviesCard(props) {
+function MoviesCard({ card, onLike, onDelete, liked, savedPage }) {
 
-  function getTimeFromMin(mins) {
-    const hours = Math.trunc(mins/60);
-    const minutes = mins % 60;
-    return `${hours}ч ${minutes}м`;
-  };
-
+  // ---ОБРАБОТЧИКИ---
   //обработчик клика по кнопке лайка
   function handleLikeClick() {
-    props.onLike(props.card);
-  }
+    onLike(card);
+  };
 
-  //обработчик клика по кнопке удаления
+  //обработчик клика по кнопке удаления/дизлайка
   function handleDeleteClick() {
-    props.onDelete(props.card);
-  }
+    onDelete(card);
+  };
 
   //---РАЗМЕТКА JSX---
   return (
     <article className='movie'>
       <div className='movie__header'>
         <div className='movie__info'>
-          <h2 className='movie__title'>{props.card.nameRU}</h2>
-          <p className='movie__duration'>{getTimeFromMin(props.card.duration)}</p>
+          <h2 className='movie__title'>{card.nameRU}</h2>
+          <p className='movie__duration'>{getTimeFromMin(card.duration)}</p>
         </div>
         <button
           className={`movie__btn
-          ${props.savedPage ? 'movie__delete-btn' : 'movie__save-btn'} 
-          ${props.liked && !props.savedPage ? 'movie__save-btn_active' : ''}`}
+          ${savedPage ? 'movie__delete-btn' : 'movie__save-btn'} 
+          ${liked && !savedPage ? 'movie__save-btn_active' : ''}`}
           type='button'
           aria-label='Сохранить в избранное'
-          onClick={props.savedPage || props.liked ? handleDeleteClick : handleLikeClick}
+          onClick={savedPage || liked ? handleDeleteClick : handleLikeClick}
         />
       </div>
-      <a className='movie__link' href={props.card.trailer || props.card.trailerLink} target='_blank' rel='noreferrer'><img className='movie__pic' src={`${props.card.image}`} alt='Фильм'/></a>
+      <a className='movie__link' href={card.trailer || card.trailerLink} target='_blank' rel='noreferrer'>
+        <img className='movie__pic' src={`${card.image}`} alt='Фильм'/>
+      </a>
     </article>
   );
-}
+};
   
 export default MoviesCard;

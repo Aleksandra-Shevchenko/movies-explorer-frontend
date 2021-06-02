@@ -1,28 +1,28 @@
 import './SearchForm.css';
 import React from 'react';
-import { useFormWithValidation } from '../../hooks/useForm';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 
-function SearchForm(props) {
+function SearchForm({ onSearchClick, savedMoviesPage, shortFilms, onCheckbox }) {
 
   const {values, errors, isValid, setValues, handleChange, setIsValid} = useFormWithValidation();
 
   // ---ОБРАБОТЧИКИ---
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSearchClick(values.query);
-  }
+    onSearchClick(values.query);
+  };
 
-  //---ЭФФЕКТЫ---
+  // ---ЭФФЕКТЫ---
   React.useEffect(() => {
-    if(!props.savedMoviesPage){
+    if (!savedMoviesPage) {
       const input = localStorage.getItem('searchQuery');
-      if(input){
+      if (input) {
         setValues({query : input});
-        setIsValid(true)
+        setIsValid(true);
       }
     }
-  }, [props.savedMoviesPage, setValues, setIsValid])
+  }, [savedMoviesPage, setValues, setIsValid]);
 
 
   return (
@@ -50,20 +50,21 @@ function SearchForm(props) {
         <div className='search-form__filter-box'>
           <p className='search-form__filter-name'>Короткометражки</p>
           <label className={`search-form__filter
-          ${props.shortFilms === 'on' ? 'search-form__filter_active' : null}`}>
+            ${shortFilms === 'on' ? 'search-form__filter_active' : null}`
+          }>
             <input className='search-form__radio search-form__radio_off'
               type='radio'
               name='shortFilms'
               value='off'
-              checked={props.shortFilms === 'off' ? true : false}
-              onChange={props.onCheckbox}
+              checked={shortFilms === 'off' ? true : false}
+              onChange={onCheckbox}
             />
             <input className='search-form__radio search-form__radio_on'
               type='radio'
               name='shortFilms'
               value='on'
-              checked={props.shortFilms === 'on' ? true : false}
-              onChange={props.onCheckbox}
+              checked={shortFilms === 'on' ? true : false}
+              onChange={onCheckbox}
             />
             <span className='search-form__switch'></span>
           </label>
@@ -71,6 +72,6 @@ function SearchForm(props) {
       </form>
     </div>
   );
-}
+};
   
 export default SearchForm;

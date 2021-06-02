@@ -3,7 +3,7 @@ import './AboutProject.css';
 
 function AboutProject() {
 
-  //---РАЗМЕТКА JSX---
+  // ---РАЗМЕТКА JSX---
   return (
     <section className='project content__section' id='project'>
       <h2 className='content__title'>О проекте</h2>
@@ -25,6 +25,6 @@ function AboutProject() {
       </div>
   </section>
   );
-}
+};
   
 export default AboutProject;

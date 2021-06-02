@@ -3,27 +3,28 @@ import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
 
-function Navigation(props) {
+function Navigation({ loggedIn }) {
 
   const [isClicked, setIsClicked] = useState(false);
 
   //---ОБРАБОТЧИКИ---
   function handleMenuOpen() {
     setIsClicked(true)
-  }
+  };
 
   function handleMenuClose() {
     setIsClicked(false)
-  }
+  };
 
   //---РАЗМЕТКА JSX---
   return (
     <nav className={`menu ${isClicked ? 'menu_open' : ''}`}>
-      {props.loggedIn ? (
+      {loggedIn ? (
         <>
           <button
-            className={`menu__btn ${isClicked ? 'menu__btn_type_close' : 'menu__btn_type_burger'} `} onClick={isClicked ? handleMenuClose : handleMenuOpen}>
-          </button>
+            className={`menu__btn ${isClicked ? 'menu__btn_type_close' : 'menu__btn_type_burger'} `}
+            onClick={isClicked ? handleMenuClose : handleMenuOpen}
+          />
 
           <div className={`menu__box ${isClicked ? 'menu__box_open' : ''}`}>
             <NavLink exact to='/' activeClassName='menu__film-link_active' className='menu__film-link app__link'
@@ -52,6 +53,6 @@ function Navigation(props) {
       )}
     </nav>
   );
-}
+};
   
 export default Navigation;

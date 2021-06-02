@@ -6,18 +6,19 @@ import { filterMovies, filterShortMovies, changeMovies} from '../../utils/utils'
 import * as moviesApi from  '../../utils/MoviesApi';
 
 
-function Movies(props) {
+function Movies({ onLikeClick, savedMoviesList, onDeleteClick }) {
 
   const forCheckbox = localStorage.getItem('shortFilms') === 'on' ? 'on' : 'off';
 
+  // состояния запросов
   const [searchQuery, setSearchQuery] = React.useState('');
   const [shortFilms, setShortFilms] = React.useState(forCheckbox);
+  // состояния фильмов
   const [filteredMovies, setFilteredMovies] = React.useState([]);
-  const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [allMovies, setAllMovies] = React.useState([]);
-
+  // состояния вспомогательные
+  const [isNothingFound, setIsNothingFound] = React.useState(false);
   const [isMoviesLoaging, setIsMoviesLoaging] = React.useState(false);
-
   const [isError, setIsError] = React.useState(false);
 
 
@@ -28,6 +29,7 @@ function Movies(props) {
     localStorage.setItem('movies', JSON.stringify(moviesList));
   }
 
+  // ---ОБРАБОТЧИКИ---
   // обработчик отправки формы
   function handleSearchSubmit(value) {
     setIsMoviesLoaging(true);
@@ -35,14 +37,14 @@ function Movies(props) {
     localStorage.setItem('searchQuery', value);
     localStorage.setItem('shortFilms', shortFilms);
     
-    if(!allMovies.length){
+    if (!allMovies.length) {
       moviesApi.getMovies()
         .then((data) => {
           changeMovies(data);
           setAllMovies(data);
           handleSetFilteredMovies(data, value, shortFilms);
         })
-        .catch(err => {
+        .catch((err) => {
           setIsError(true);
           console.log(err);
         })
@@ -59,16 +61,16 @@ function Movies(props) {
     localStorage.setItem('shortFilms', e.target.value);
 	}
 
-  // обработчик устновки значения пустого запроса
+  // обработчик устновки значения, когда ничего не найдено
   function handleCheckFilteredMovies(arr) {
     arr.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
 	}
 
-  //---ЭФФЕКТЫ---
+  // ---ЭФФЕКТЫ---
   // проверяем есть ли данные в хранилище
   React.useEffect(() => {
     const arr = JSON.parse(localStorage.getItem('movies'));
-    if(arr && !searchQuery){
+    if (arr && !searchQuery) {
       setShortFilms(localStorage.getItem('shortFilms'));
       setFilteredMovies(shortFilms === 'on' ? filterShortMovies(arr) : arr);
       handleCheckFilteredMovies(arr);
@@ -84,20 +86,22 @@ function Movies(props) {
     }
   }, [searchQuery, shortFilms, allMovies])
 
-
-
   //---РАЗМЕТКА JSX---
   return (
     <section className='movies'>
-      <SearchForm onSearchClick={handleSearchSubmit} onCheckbox={handleShortFilms} shortFilms={shortFilms} />
+      <SearchForm
+        onSearchClick={handleSearchSubmit}
+        onCheckbox={handleShortFilms}
+        shortFilms={shortFilms}
+      />
       <MoviesCardList
         isLoading={isMoviesLoaging}
         list={filteredMovies}
         isEmptyList={isNothingFound}
-        onLike={props.onLikeClick}
-        onDelete={props.onDeleteClick}
-        savedMovies={props.savedMoviesList}
         isError={isError}
+        onLike={onLikeClick}
+        onDelete={onDeleteClick}
+        savedMovies={savedMoviesList}
       />
     </section>
   );

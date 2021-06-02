@@ -1,31 +1,39 @@
 import './Entrance.css';
-
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import React from 'react';
-import { useFormWithValidation } from '../../hooks/useForm';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import InfoMessage from '../InfoMessage/InfoMessage';
 
 
-function Entrance(props) {
+function Entrance({
+  type,
+  linkTo,
+  title,
+  btnName,
+  subtitle,
+  linkName,
+  onSubmit,
+  infoMessage,
+ }) {
+
   const {values, errors, isValid, handleChange} = useFormWithValidation();
 
-
-  //---ОБРАБОТЧИКИ---
+  // ---ОБРАБОТЧИКИ---
   function handleSubmit(e) {
     e.preventDefault();
-    props.type === 'signup'
-      ? props.onSubmit(values.name, values.email, values.password)
-      : props.onSubmit(values.email, values.password);
-  }
+    type === 'signup'
+      ? onSubmit(values.name, values.email, values.password)
+      : onSubmit(values.email, values.password);
+  };
 
   //---РАЗМЕТКА JSX---
   return (
     <section className='entrance'>
       <Logo />
-      <h2 className='entrance__title'>{props.title}</h2>
+      <h2 className='entrance__title'>{title}</h2>
       <form className='entrance__form' onSubmit={handleSubmit}>
-        {props.type === 'signup' && (
+        {type === 'signup' && (
           <label className='entrance__label'>Имя
             <input
               id='name'
@@ -40,7 +48,8 @@ function Entrance(props) {
               onChange={handleChange}
             />
             <span id='name-error' className='entrance__error'>
-              {errors.name ? 'поле должно быть заполнено и может содержать только латиницу, кириллицу, пробел или дефис' : ''}
+              {errors.name ? `Поле должно быть заполнено и может содержать только латиницу,
+                кириллицу, пробел или дефис` : ''}
             </span>
             </label>
         )}
@@ -77,23 +86,23 @@ function Entrance(props) {
           </span>
         </label>
 
-        <InfoMessage {...props.infoMessage} />
+        <InfoMessage {...infoMessage} />
 
         <button
-          className={`entrance__submit-btn 
-            app__link
-            ${props.type === 'signup' && 'entrance__login-btn'}
-            ${!isValid && 'entrance__submit-btn_diabled'}`
-          }
+          className={`entrance__submit-btn app__link
+            ${type === 'signup' && 'entrance__login-btn'}
+          `}
           type='submit'
           disabled={!isValid}
         >
-          {props.btnName}
+          {btnName}
         </button>
-        <p className='entrance__subtitle'>{props.subtitle}<Link to={props.linkTo} className='entrance__link app__link'>{props.linkName}</Link></p>
+        <p className='entrance__subtitle'>{subtitle}
+          <Link to={linkTo} className='entrance__link app__link'>{linkName}</Link>
+        </p>
       </form>
     </section>
   );
-}
+};
   
 export default Entrance;

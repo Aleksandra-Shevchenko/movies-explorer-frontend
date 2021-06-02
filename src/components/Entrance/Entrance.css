@@ -80,13 +80,8 @@
   line-height: 17px;
 }
 
-.entrance__submit-btn_diabled{
-  color:#000;
-  background-color: #fff;
-}
-
-.entrance__submit-btn_diabled:hover{
-  opacity: 1;
+.entrance__submit-btn:disabled{
+  opacity: .2;
   cursor: default;
 }
 
