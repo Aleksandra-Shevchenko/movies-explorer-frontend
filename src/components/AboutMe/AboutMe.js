@@ -17,8 +17,12 @@ function AboutMe() {
             </p>
           </div>
           <ul className='about-me__contacts'>
-            <li className='about-me__contact'><a className='about-me__link app__link-outside' href='https://www.facebook.com/dorosh.ag' target='_blank' rel='noopener noreferrer'>Facebook</a></li>
-            <li className='about-me__contact'><a className='about-me__link app__link-outside' href='https://github.com/Aleksandra-Shevchenko' target='_blank' rel='noopener noreferrer'>Github</a></li>
+            <li className='about-me__contact'>
+              <a className='about-me__link app__link-outside' href='https://www.facebook.com/dorosh.ag' target='_blank' rel='noopener noreferrer'>Facebook</a>
+            </li>
+            <li className='about-me__contact'>
+              <a className='about-me__link app__link-outside' href='https://github.com/Aleksandra-Shevchenko' target='_blank' rel='noopener noreferrer'>Github</a>
+            </li>
           </ul>
         </div>
         <div className='about-me__photo-box'>
@@ -27,6 +31,6 @@ function AboutMe() {
       </article>
     </section>
   );
-}
+};
   
 export default AboutMe;

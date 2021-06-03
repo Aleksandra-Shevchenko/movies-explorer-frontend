@@ -29,6 +29,8 @@
   flex-direction: column;
   width: 100%;
   margin-top: 107px;
+  overflow: hidden;
+  position: relative;
 }
 
 .profile__label{
@@ -39,18 +41,18 @@
   align-items: center;
   border-bottom: 1px solid #E8E8E8;
   position: relative;
-  overflow: hidden;
 }
 
 .profile__label:last-of-type{
   border-bottom: none;
+  margin-top: 6px;
 }
 
 .profile__input{
   border: none;
   background-color: transparent;
   text-align: end;
-  padding: 16px 0 16px;
+  padding: 18px 0;
   font-style: inherit;
   font-weight: 400;
   font-size: 11px;
@@ -60,6 +62,7 @@
   box-sizing: border-box;
 }
 
+
 .profile__btn{
   border: none;
   background-color: transparent;
@@ -68,7 +71,20 @@
 }
 
 .profile__btn_type_submit{
-  margin-top: auto;
+  margin-bottom: 6px;
+  height: 45px;
+  color:#fff;
+  background-color: #000;
+  border: none;
+  border-radius: 3px;
+}
+
+.profile__btn_type_submit:disabled{
+  opacity: .2;
+  cursor: default;
+}
+
+.profile__btn_type_redact{
   margin-bottom: 16px;
 }
 
@@ -88,8 +104,8 @@
   font-size: 10px;
   line-height: 1.2;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 50px;
+  left: 0;
 }
 
 .profile__input:focus{
@@ -99,6 +115,7 @@
 
 .profile__input:invalid{
   color: #FF4062;
+  border-bottom: 1px solid #FF4062;
 }
 
 
@@ -116,9 +133,9 @@
     margin-top: 96px;
   }
 
-  .profile__btn_type_submit{
+  /* .profile__btn_type_submit{
     margin-top: 0;
-  }
+  } */
 
   .profile__label:last-of-type{
     margin-bottom: 194px;
@@ -135,9 +152,9 @@
     flex-grow: 1;
   }
 
-  .profile__btn_type_submit{
+  /* .profile__btn_type_submit{
     margin-top: auto;
-  }
+  } */
   .profile__label:last-of-type{
     margin-bottom: 0;
   }

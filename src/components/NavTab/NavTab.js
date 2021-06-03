@@ -19,6 +19,6 @@ function NavTab() {
       </ul>
     </nav>
   );
-}
+};
   
 export default NavTab;

@@ -24,6 +24,6 @@ function Portfolio() {
     </ul>
     </section>
   );
-}
+};
   
 export default Portfolio;

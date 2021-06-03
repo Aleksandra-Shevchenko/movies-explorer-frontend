@@ -2,7 +2,7 @@ import './Techs.css';
 
 function Techs() {
 
-  //---РАЗМЕТКА JSX---
+  // ---РАЗМЕТКА JSX---
   return (
     <section className='techs content__section' id='techs'>
       <h2 className='content__title'>Технологии</h2>
@@ -17,11 +17,8 @@ function Techs() {
         <li className='techs__item'>Express.js</li>
         <li className='techs__item'>mongoDB</li>
       </ul>
-
-
-
     </section>
   );
-}
+};
   
 export default Techs;
